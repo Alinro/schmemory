@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "So much schmemorizing",
   "scripts": {
-    "start": "node server.js"
+    "start": "tsx server.ts"
   },
   "author": "schibsted",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "jdenticon": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.4",
+    "tsx": "^4.19.1"
   }
 }
