@@ -1,8 +1,10 @@
 {
-  "name": "schmemory",
-  "private": true,
-  "version": "0.0.0",
+  "name": "sch-memory-game-client",
+  "version": "1.0.0",
+  "description": "So much schmemorizing",
   "type": "module",
+  "author": "schibsted",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
