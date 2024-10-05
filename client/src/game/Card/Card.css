@@ -1,0 +1,18 @@
+img {
+    visibility: hidden;
+}
+
+.card {
+    background-color: lightblue;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+
+    &.flipped {
+        pointer-events: none;
+
+        img {
+            visibility: visible;
+        }
+    }
+}

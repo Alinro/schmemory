@@ -1,5 +1,5 @@
 import ICard from "./ICard";
-
+import "./Card.css";
 export default class Card implements ICard {
   private flipped = false;
   private identifier: number;
@@ -8,7 +8,8 @@ export default class Card implements ICard {
 
   constructor(identifier: number, onFlip: (card: Card) => void) {
     this.identifier = identifier;
-    this.container.innerHTML = `<img src="${import.meta.env.VITE_IMAGE_BASE_URL}/svg/${identifier}/200" />`;
+    this.container.className = "card";
+    this.container.innerHTML = `<img src="${import.meta.env.VITE_IMAGE_BASE_URL}/svg/${identifier}/100" />`;
     this.container.addEventListener("click", () => {
       this.onFlip();
       onFlip(this);

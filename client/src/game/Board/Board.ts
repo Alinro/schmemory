@@ -1,5 +1,6 @@
 import { ICardConstructor } from "../Card/ICard";
 import ITracker from "../Tracker/ITracker";
+import "./Board.css";
 
 type Pair = [InstanceType<ICardConstructor>?, InstanceType<ICardConstructor>?];
 
@@ -7,8 +8,7 @@ export default class Board {
   private CardConstructor: ICardConstructor;
   private tracker: ITracker;
 
-  private rows: number;
-  private columns: number;
+  private numberOfPairs: number;
 
   private cardCollection: number[] = [];
 
@@ -16,29 +16,28 @@ export default class Board {
 
   private currentPair: Pair = [];
 
-  // TODO: named parameters
+  // TODO: named parameters if there are too many
   constructor(
     CardClass: ICardConstructor,
     tracker: ITracker,
-    rows: number,
-    columns: number
+    numberOfPairs: number
   ) {
     this.CardConstructor = CardClass;
     this.tracker = tracker;
 
-    // TODO: validate rows and columns. set limits
-    this.rows = rows;
-    this.columns = columns;
+    // TODO: set limits
+    this.numberOfPairs = numberOfPairs;
 
-    for (let i = 0; i < rows * columns; i++) {
-      this.cardCollection.push(i % ((rows * columns) / 2));
+    for (let i = 0; i < numberOfPairs * 2; i++) {
+      this.cardCollection.push(i % numberOfPairs);
     }
+    this.container.className = "board";
     document.body.appendChild(this.container);
     this.populateBoard();
   }
 
   private populateBoard(): void {
-    for (let i = 0; i < this.rows * this.columns; i++) {
+    for (let i = 0; i < this.numberOfPairs * 2; i++) {
       const card = new this.CardConstructor(
         this.cardCollection[i],
         this.handleCardFlip.bind(this)
@@ -57,13 +56,14 @@ export default class Board {
   private checkPair(): void {
     if (this.currentPair[0]?.Identifier === this.currentPair[1]?.Identifier) {
       this.tracker.onScoreChange(1);
-      this.currentPair = [];
     } else {
+      // if people click the cards too fast, we need to save the current pair for when the setTimeout runs
+      const currentPair = this.currentPair;
       setTimeout(() => {
-        this.currentPair[0]?.onFlip();
-        this.currentPair[1]?.onFlip();
-        this.currentPair = [];
+        currentPair[0]?.onFlip();
+        currentPair[1]?.onFlip();
       }, 1000);
     }
+    this.currentPair = [];
   }
 }
