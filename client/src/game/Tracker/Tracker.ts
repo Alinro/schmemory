@@ -10,4 +10,8 @@ export default class Tracker implements ITracker {
   public onScoreChange(score: number): void {
     this.score += score;
   }
+
+  public get Score(): number {
+    return this.score;
+  }
 }

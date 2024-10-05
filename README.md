@@ -108,3 +108,5 @@ Example: `GET /svg/alice/200` will return a SVG image of size 200x200 for the st
 - Run eslint / prettier checks on pre-commit hooks using Husky (https://typicode.github.io/husky/)
 - Run eslint / prettier / tests post-commit in a GitHub Action (maybe as part of the CI/CD pipeline)
 - Try `vite-plugin-eslint` plugin
+- load images only after clicking a card, not on page load
+- shuffle cards before populating the board

@@ -16,6 +16,8 @@ export default class Board {
 
   private currentPair: Pair = [];
 
+  public cards: InstanceType<ICardConstructor>[] = [];
+
   // TODO: named parameters if there are too many
   constructor(
     CardClass: ICardConstructor,
@@ -43,6 +45,7 @@ export default class Board {
         this.handleCardFlip.bind(this)
       );
       this.container.appendChild(card.Element);
+      this.cards.push(card);
     }
   }
 
@@ -65,5 +68,9 @@ export default class Board {
       }, 1000);
     }
     this.currentPair = [];
+  }
+
+  public get Tracker(): ITracker {
+    return this.tracker;
   }
 }
