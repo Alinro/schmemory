@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "So much schmemorizing",
   "scripts": {
-    "start": "tsx server.ts"
+    "dev": "tsx server.ts"
   },
   "author": "schibsted",
   "license": "MIT",
