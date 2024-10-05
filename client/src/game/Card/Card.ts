@@ -6,10 +6,13 @@ export default class Card implements ICard {
 
   private container = document.createElement("div");
 
-  constructor(identifier: number) {
+  constructor(identifier: number, onFlip: (card: Card) => void) {
     this.identifier = identifier;
     this.container.innerHTML = `<img src="${import.meta.env.VITE_IMAGE_BASE_URL}/svg/${identifier}/200" />`;
-    this.container.addEventListener("click", () => this.onFlip());
+    this.container.addEventListener("click", () => {
+      this.onFlip();
+      onFlip(this);
+    });
   }
 
   public onFlip(): void {
