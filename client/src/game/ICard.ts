@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ICardConstructor = new (...args: any[]) => ICard;
+
 export default abstract class ICard {
   public abstract onFlip(): void;
 

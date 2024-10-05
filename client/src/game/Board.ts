@@ -1,8 +1,8 @@
-import ICard from "./ICard";
+import { ICardConstructor } from "./ICard";
 import ITracker from "./ITracker";
 
-export default class Board<T extends ICard, U extends ITracker> {
-  private CardClass: new (identifier: number) => T;
+export default class Board {
+  private CardConstructor: ICardConstructor;
   private tracker: ITracker;
 
   private rows: number;
@@ -12,14 +12,15 @@ export default class Board<T extends ICard, U extends ITracker> {
 
   private container = document.createElement("div");
 
+  // TODO: named parameters
   constructor(
-    CardClass: new (identifier: number) => T,
-    TrackerClass: new () => U,
+    CardClass: ICardConstructor,
+    tracker: ITracker,
     rows: number,
     columns: number
   ) {
-    this.CardClass = CardClass;
-    this.tracker = new TrackerClass();
+    this.CardConstructor = CardClass;
+    this.tracker = tracker;
 
     // TODO: validate rows and columns. set limits
     this.rows = rows;
@@ -34,7 +35,7 @@ export default class Board<T extends ICard, U extends ITracker> {
 
   private populateBoard(): void {
     for (let i = 0; i < this.rows * this.columns; i++) {
-      const card = new this.CardClass(this.cardCollection[i]);
+      const card = new this.CardConstructor(this.cardCollection[i]);
       this.container.appendChild(card.Element);
     }
   }
