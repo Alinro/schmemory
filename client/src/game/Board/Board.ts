@@ -61,6 +61,10 @@ export default class Board {
       this.tracker.onScoreChange(1);
       this.currentPair[0]?.removeListeners();
       this.currentPair[1]?.removeListeners();
+
+      if (this.isGameOver()) {
+        this.tracker.onGameOver();
+      }
     } else {
       // if people click the cards too fast, we need to save the current pair for when the setTimeout runs
       const currentPair = this.currentPair;
@@ -75,5 +79,12 @@ export default class Board {
 
   public get Tracker(): ITracker {
     return this.tracker;
+  }
+
+  private isGameOver(): boolean {
+    // TODO: better check for flipped cards (maybe a new isFlipped method on card)
+    return !this.cards.some(
+      (card) => !card.Element.classList.contains("flipped")
+    );
   }
 }

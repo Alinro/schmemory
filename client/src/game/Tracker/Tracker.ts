@@ -79,4 +79,20 @@ export default class Tracker implements ITracker {
   public get Score(): Record<Players, number> {
     return this.score;
   }
+
+  public onGameOver(): void {
+    const div = document.createElement("div");
+    let gameOverText = `It's a draw`;
+
+    if (this.score[Players.Player1] === this.score[Players.Player2]) {
+      gameOverText = `It's a draw`;
+    } else if (this.score[Players.Player1] > this.score[Players.Player2]) {
+      gameOverText = `${Players.Player1} wins!`;
+    } else {
+      gameOverText = `${Players.Player2} wins!`;
+    }
+
+    div.innerText = `Game over! ${gameOverText}`;
+    this.trackerContainer.appendChild(div);
+  }
 }

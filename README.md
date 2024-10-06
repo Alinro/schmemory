@@ -119,8 +119,7 @@ Example: `GET /svg/alice/200` will return a SVG image of size 200x200 for the st
 - shuffle cards before populating the board
 - better UI/UX
 - button to reload game
-- save game stats to local storage
-- end of game winner showoff
+- save game stats to local storage (after every move or at the end of game)
 - different colored highlight based on current player
 - improve accesibility by adding ARIA roles and attributes
 - add support to the Board for multiple tracker instances

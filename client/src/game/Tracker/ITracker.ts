@@ -2,6 +2,7 @@ export default abstract class ITracker {
   public abstract onScoreChange(score: number): void;
   public abstract onScoreUnchanged(): void;
   public abstract get Score(): Record<Players, number>;
+  public abstract onGameOver(): void;
 }
 
 export enum Players {
