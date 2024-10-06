@@ -6,6 +6,8 @@ export default class Card implements ICard {
 
   private container = document.createElement("div");
 
+  onFlipProp: (card: Card) => void;
+
   constructor(identifier: number, onFlip: (card: Card) => void) {
     this.identifier = identifier;
 
@@ -13,17 +15,28 @@ export default class Card implements ICard {
     this.container.innerHTML = `<img src="${import.meta.env.VITE_IMAGE_BASE_URL}/svg/${identifier}/100"/>`;
     this.container.tabIndex = 0;
 
+    this.onFlipProp = onFlip;
+
     // write this in a nicer way, maybe unify the onFlip calls in separate function
-    this.container.addEventListener("click", () => {
+    this.container.addEventListener("click", this.clickListener);
+    this.container.addEventListener("keydown", this.keydownListener);
+  }
+
+  private clickListener = () => {
+    this.onFlip();
+    this.onFlipProp(this);
+  };
+
+  private keydownListener = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
       this.onFlip();
-      onFlip(this);
-    });
-    this.container.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        this.onFlip();
-        onFlip(this);
-      }
-    });
+      this.onFlipProp(this);
+    }
+  };
+
+  public removeListeners() {
+    this.container.removeEventListener("click", this.clickListener);
+    this.container.removeEventListener("keydown", this.keydownListener);
   }
 
   public onFlip(): void {

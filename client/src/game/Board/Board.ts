@@ -59,6 +59,8 @@ export default class Board {
   private checkPair(): void {
     if (this.currentPair[0]?.Identifier === this.currentPair[1]?.Identifier) {
       this.tracker.onScoreChange(1);
+      this.currentPair[0]?.removeListeners();
+      this.currentPair[1]?.removeListeners();
     } else {
       // if people click the cards too fast, we need to save the current pair for when the setTimeout runs
       const currentPair = this.currentPair;
@@ -66,6 +68,7 @@ export default class Board {
         currentPair[0]?.onFlip();
         currentPair[1]?.onFlip();
       }, 1000);
+      this.tracker.onScoreUnchanged();
     }
     this.currentPair = [];
   }

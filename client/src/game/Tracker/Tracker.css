@@ -1,3 +1,8 @@
 .tracker {
     width: 100%;
+    text-align: center;
+
+    .currentPlayer {
+        font-weight: 600;
+    }
 }

@@ -110,3 +110,8 @@ Example: `GET /svg/alice/200` will return a SVG image of size 200x200 for the st
 - Try `vite-plugin-eslint` plugin
 - load images only after clicking a card, not on page load
 - shuffle cards before populating the board
+- better UI/UX
+- button to reload game
+- save game stats to local storage
+- end of game winner showoff
+- different colored highlight based on current player
