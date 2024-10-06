@@ -91,16 +91,24 @@ Example: `GET /svg/alice/200` will return a SVG image of size 200x200 for the st
 
 # Things I did
 
-- `npm install` failed with errors, tested with multiple Node versions on multiple MacOS machines. The root cause was the `node-sass` package. Replacing it with the now recommended `sass` package at latest version allowed me to successfully run `npm install`
-- Running the project with `npm run start:all` resulted in errors such as `Error: error:0308010C:digital envelope routines::unsupported`, which were fixed by running `NODE_OPTIONS=--openssl-legacy-provider npm run start:all`. However, at this point I ran into runtime errors related to `sass-loader`, most likely meaning that my quick solution to replace `node-sass` wasn't optimal
+- Using the "starter-kit", `npm install` failed with errors, tested with multiple Node versions on multiple MacOS machines. The root cause was the `node-sass` package. Replacing it with the now recommended `sass` package at latest version allowed me to successfully run `npm install`
+- Running the "starter-kit" project with `npm run start:all` resulted in errors such as `Error: error:0308010C:digital envelope routines::unsupported`, which were fixed by running `NODE_OPTIONS=--openssl-legacy-provider npm run start:all`. However, at this point I ran into runtime errors related to `sass-loader`, most likely meaning that my quick solution to replace `node-sass` wasn't optimal
 - Due to time constraints, I decided to bootstrap a project from scratch using `npm create vite@latest` and re-use some of the code provided in the "starter kit"
   - One of the benefits is that the client code now supports Typescript out of the box
-- Separated client and server code in two seperate node projects and folders
-- Added `.nvmrc` file for people using `nvm`, to easily determine the recommended Node.js version
-- Updated the server code with Typescript and types
-- Added eslint support for the client code
-- Added prettier support for the client code
-- Added VSCode recommended extensions
+- Initially focused on developer experience
+  - Separated client and server code in two seperate node projects and folders
+  - Typescript support for both client and server code
+  - Added `.nvmrc` file for people using `nvm`, to easily determine the recommended Node.js version
+  - Added eslint support for the client code
+  - Added prettier support for the client code
+  - Added VSCode recommended extensions
+- Implemented the game
+  - Separated Board, Card and Tracker concepts
+  - Multiple Card and Tracker implementations can be defined in the future, by implementing the defined interfaces
+  - Implemented clean and basic (but responsive) UI/UX
+  - Implemented local two player mode, with score and move tracking for each player
+  - For accessibility, the game can be played without using a mouse, only with the keyboard (using the Tab, Enter keys)
+  - Added a basic test, flipping a card and checking the score
 
 # Ideas to improve the project
 
@@ -108,10 +116,11 @@ Example: `GET /svg/alice/200` will return a SVG image of size 200x200 for the st
 - Run eslint / prettier checks on pre-commit hooks using Husky (https://typicode.github.io/husky/)
 - Run eslint / prettier / tests post-commit in a GitHub Action (maybe as part of the CI/CD pipeline)
 - Try `vite-plugin-eslint` plugin
-- load images only after clicking a card, not on page load
 - shuffle cards before populating the board
 - better UI/UX
 - button to reload game
 - save game stats to local storage
 - end of game winner showoff
 - different colored highlight based on current player
+- improve accesibility by adding ARIA roles and attributes
+- add support to the Board for multiple tracker instances
