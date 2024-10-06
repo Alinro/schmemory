@@ -1,12 +1,17 @@
-img {
-    visibility: hidden;
-}
-
 .card {
     background-color: lightblue;
     cursor: pointer;
     width: 100px;
     height: 100px;
+
+    &:focus {
+        outline: thick solid red
+    }
+
+    img {
+        visibility: hidden;
+        user-select: none;
+    }
 
     &.flipped {
         pointer-events: none;

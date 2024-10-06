@@ -3,4 +3,4 @@ import Card from "./game/Card/Card";
 import Tracker from "./game/Tracker/Tracker";
 import "./style.css";
 
-new Board(Card, new Tracker(), 10);
+new Board(Card, new Tracker(document.body), 10);

@@ -4,7 +4,7 @@ import Tracker from "../Tracker/Tracker";
 import Board from "./Board";
 
 test("flip the same cards, score is increased", () => {
-  const board = new Board(Card, new Tracker(), 10);
+  const board = new Board(Card, new Tracker(document.body), 10);
 
   board.cards[0].onFlip();
   board.cards[10].onFlip();
@@ -15,7 +15,7 @@ test("flip the same cards, score is increased", () => {
 });
 
 test("flip different cards, score is not increased", () => {
-  const board = new Board(Card, new Tracker(), 10);
+  const board = new Board(Card, new Tracker(document.body), 10);
 
   board.cards[0].onFlip();
   board.cards[1].onFlip();

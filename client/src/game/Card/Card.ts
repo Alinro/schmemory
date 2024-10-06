@@ -6,21 +6,29 @@ export default class Card implements ICard {
 
   private container = document.createElement("div");
 
-  private onFlipProp: (card: Card) => void;
-
   constructor(identifier: number, onFlip: (card: Card) => void) {
     this.identifier = identifier;
-    this.onFlipProp = onFlip;
 
     this.container.className = "card";
-    this.container.innerHTML = `<img src="${import.meta.env.VITE_IMAGE_BASE_URL}/svg/${identifier}/100" />`;
-    this.container.addEventListener("click", this.onFlip);
+    this.container.innerHTML = `<img src="${import.meta.env.VITE_IMAGE_BASE_URL}/svg/${identifier}/100"/>`;
+    this.container.tabIndex = 0;
+
+    // write this in a nicer way, maybe unify the onFlip calls in separate function
+    this.container.addEventListener("click", () => {
+      this.onFlip();
+      onFlip(this);
+    });
+    this.container.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        this.onFlip();
+        onFlip(this);
+      }
+    });
   }
 
   public onFlip(): void {
     this.flipped = !this.flipped;
     this.container.classList.toggle("flipped");
-    this.onFlipProp(this);
   }
 
   public get Identifier() {
