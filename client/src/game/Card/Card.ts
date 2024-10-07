@@ -1,11 +1,16 @@
 import ICard from "./ICard";
 import "./Card.css";
 export default class Card implements ICard {
+  // card state (flipped or not)
   private flipped = false;
+
+  // when comparing two cards, we need to know if they are the same
   private identifier: number;
 
+  // container where the html elements will be appended
   private container = document.createElement("div");
 
+  // callback received, to be called when the card is flipped
   onFlipProp: (card: Card) => void;
 
   constructor(identifier: number, onFlip: (card: Card) => void) {

@@ -2,10 +2,12 @@ import ITracker, { Players } from "./ITracker";
 import "./Tracker.css";
 
 export default class Tracker implements ITracker {
+  // score for each player
   private score = {
     [Players.Player1]: 0,
     [Players.Player2]: 0,
   };
+  // number of moves for each player
   private moves = {
     [Players.Player1]: 0,
     [Players.Player2]: 0,
@@ -13,6 +15,7 @@ export default class Tracker implements ITracker {
 
   private currentPlayer = Players.Player1;
 
+  // multiple containers where html elements will be appended
   private trackerContainer = document.createElement("div");
   private scoreContainer = document.createElement("div");
   private movesContainer = document.createElement("div");

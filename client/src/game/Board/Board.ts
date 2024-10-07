@@ -5,19 +5,29 @@ import "./Board.css";
 type Pair = [InstanceType<ICardConstructor>?, InstanceType<ICardConstructor>?];
 
 export default class Board {
+  // interfaces are useful for knowing the public methods and properties of a class
+  // we don't need to know the implementation details, just the contract
+
+  // for the card, we need the class to create multiple instance
   private CardConstructor: ICardConstructor;
+  // for the tracker, it's enough to receive an instance
   private tracker: ITracker;
 
   private numberOfPairs: number;
 
+  // identifiers for the cards that will be generated. could be improved by merging it with this.cards
   private cardCollection: number[] = [];
 
+  // container where all html elements will be appended
   private container = document.createElement("div");
 
+  // current pair of flipped cards. resets when two cards are flipped
   private currentPair: Pair = [];
 
+  // all cards that are generated
   public cards: InstanceType<ICardConstructor>[] = [];
 
+  // used dependency injection for the card and tracker classes so it's easier to test and swap implementations
   // TODO: named parameters if there are too many
   constructor(
     CardClass: ICardConstructor,
@@ -62,6 +72,7 @@ export default class Board {
       this.currentPair[0]?.removeListeners();
       this.currentPair[1]?.removeListeners();
 
+      // after every successful pair, we need to check if the game is over
       if (this.isGameOver()) {
         this.tracker.onGameOver();
       }
